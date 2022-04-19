@@ -129,7 +129,7 @@ const DashboardPage = () => {
   const { isLoading, error, data } = usePatientsData(searchText);
 
   const searchTextHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.currentTarget.value
+    const value = event.currentTarget.value.trim()
     setSearchText(value)
     setSortDirection("DESC");
   }
