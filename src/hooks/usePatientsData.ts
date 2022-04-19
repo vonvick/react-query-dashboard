@@ -2,8 +2,10 @@ import { useQuery } from "react-query";
 import axios, { AxiosResponse } from "axios";
 import { PatientsDataInterface } from "../typings";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 const fetchPatients = async ({ search }: { search: string }) => {
-  let url = `https://61ba219448df2f0017e5a929.mockapi.io/api/patients`
+  let url = `${apiUrl}/patients`
 
   if (search.length > 1) {
     url += `?search=${search}`

@@ -10,6 +10,7 @@ import {
 } from "../../typings";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import usePatientsData from "../../hooks/usePatientsData";
+import { dateFormatter } from "../../helpers";
 
 const DashboardContainer = styled.div`
   width: 100%;
@@ -17,7 +18,7 @@ const DashboardContainer = styled.div`
 
 const DashboardWrapper = styled.div`
   max-width: 1300px;
-  margin: 150px auto 0 auto;
+  margin: 150px auto 30px auto;
   
   .sort-button-wrapper {
     display: flex;
@@ -191,6 +192,19 @@ const DashboardPage = () => {
                   >
                     {
                       tableHeaders.map((header, headerIndex) => {
+                        if (header.columnId && header.columnId !== "vaccineDate") {
+                          return (
+                            <CustomTable.Td key={headerIndex}>
+                              {patient[header.columnId as keyof PatientsDataInterface]}
+                            </CustomTable.Td>
+                          )
+                        } else if (header.columnId && header.columnId === "vaccineDate") {
+                          return (
+                            <CustomTable.Td key={headerIndex} onClick={sortPatientsData}>
+                              { dateFormatter(patient.vaccineDate) }
+                            </CustomTable.Td>
+                          )
+                        }
                         return (
                           <CustomTable.Td key={headerIndex}>
                             { header.columnId ? patient[header.columnId as keyof PatientsDataInterface] : `${patient.lastName} ${patient.firstName}` }
@@ -211,7 +225,13 @@ const DashboardPage = () => {
     <DashboardContainer>
       <Navbar>
         <SearchWrapper>
-          <TextInput value={searchText} handler={searchTextHandler} inputType="text" placeholderText="Enter a text to search"/>
+          <TextInput
+            value={searchText}
+            handler={searchTextHandler}
+            inputType="text"
+            placeholderText="Enter a text to search"
+            ariaLabel="patient-search-input"
+          />
         </SearchWrapper>
       </Navbar>
       <DashboardWrapper>

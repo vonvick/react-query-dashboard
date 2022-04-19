@@ -8,16 +8,20 @@ const StyledInput = styled.input `
   width: ${props => props.width || '200px'}
 `;
 
-interface InputTextInterface {
-  value: any;
-  inputType: 'text' | 'number';
-  handler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+type inputType = "text" | "number"
+
+export interface InputTextInterface {
+  value: any
+  inputType: inputType
+  handler?: (event: React.ChangeEvent<HTMLInputElement>) => void
   placeholderText: string
+  ariaLabel: string
 }
 
-const InputText = ({ value, handler, inputType, placeholderText }: InputTextInterface) => {
+const InputText = ({ value, handler, inputType, placeholderText, ariaLabel }: InputTextInterface) => {
   return (
     <StyledInput
+      aria-label={ariaLabel}
       value={ value }
       onChange={ handler }
       type={ inputType }

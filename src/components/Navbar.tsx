@@ -40,7 +40,7 @@ const NavBar = ({ children }: ExtendedProps ) => {
   return (
     <StyledNav data-testid="nav-bar">
       <StyledLogo>
-        <p>AccuRx</p>
+        <p>AccuRx Dashboard</p>
       </StyledLogo>
       <StyledNavLinks>{ children }</StyledNavLinks>
     </StyledNav>
