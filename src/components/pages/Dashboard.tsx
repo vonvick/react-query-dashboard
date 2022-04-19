@@ -30,6 +30,17 @@ const DashboardWrapper = styled.div`
 
 const SearchWrapper = styled.div`
   margin-right: 12px;
+  position: relative;
+  input {
+    padding-right: 20px;
+  }
+  .search-icon {
+    position: absolute;
+    right: 10px;
+    top: 20%;
+    color: grey;
+    cursor: pointer;
+  }
 `;
 
 const PatientsTable = styled(CustomTable)`
@@ -130,6 +141,12 @@ const DashboardPage = () => {
       setSortDirection('DESC')
     }
   };
+
+  const changeSearchIcon = () => {
+    if (searchText) {
+      setSearchText('');
+    }
+  }
 
   const ResultPage = () => {
     if (isLoading) return (
@@ -232,6 +249,9 @@ const DashboardPage = () => {
             placeholderText="Enter a text to search"
             ariaLabel="patient-search-input"
           />
+          <span className="search-icon">
+            <FontAwesomeIcon icon={searchText ? 'times' : 'search'} onClick={changeSearchIcon}/>
+          </span>
         </SearchWrapper>
       </Navbar>
       <DashboardWrapper>

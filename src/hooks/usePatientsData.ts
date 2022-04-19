@@ -7,7 +7,7 @@ const apiUrl = process.env.REACT_APP_API_URL;
 const fetchPatients = async ({ search }: { search: string }) => {
   let url = `${apiUrl}/patients`
 
-  if (search.length > 1) {
+  if (search.trim().length > 1) {
     url += `?search=${search}`
   }
   const { data }: AxiosResponse<Array<PatientsDataInterface>> = await axios.get(url);
